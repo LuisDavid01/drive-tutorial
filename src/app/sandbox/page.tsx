@@ -1,6 +1,6 @@
 import { db } from "~/server/db"
 import { mockFolders, mockFiles } from "~/lib/mock-data"
-import { files, folders } from "~/server/db/schema";
+import { files_table, folders_table } from "~/server/db/schema";
 export default function SandboxPage(){
     return(
         <div className="flex flex-col gap-4">
@@ -9,7 +9,7 @@ export default function SandboxPage(){
                 "use server";
 
                 console.log("sup nerds")
-                await db.insert(folders).values(
+                await db.insert(folders_table).values(
                 mockFolders.map((folder, index) => ({
                     id: index + 1,
                     name: folder.name,
@@ -17,7 +17,7 @@ export default function SandboxPage(){
                     ownerId: "mock",
                 }))
                 );
-                await db.insert(files).values(mockFiles.map(
+                await db.insert(files_table).values(mockFiles.map(
                     (file, index) => ({
                         id: index + 1,
                     name: file.name,
