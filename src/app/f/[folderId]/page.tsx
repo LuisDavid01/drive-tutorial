@@ -19,7 +19,7 @@ export default async function GoogleDriveClone( props:
     
   const files = await db.select().from(fileSchema);
   const folders = await db.select()
-  .from(folderSchema)
-  .where(eq(folderSchema.parent, parsedFolderId));
+    .from(folderSchema)
+    .where(eq(folderSchema.parent, parsedFolderId));
   return(<DriveContents files={files} folders={folders} />)
 }
