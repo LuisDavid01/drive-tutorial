@@ -4,7 +4,13 @@ import { Button } from "~/components/ui/button"
 import { FileRow, FolderRow } from "./folder-row"
 import type { files_table, folders_table } from "~/server/db/schema"
 import Link from "next/link"
-
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[],
   folders: (typeof folders_table.$inferSelect)[],
@@ -58,10 +64,17 @@ export default function DriveContents(props: {
               </div>
             ))}
           </div>
-          <Button  className="bg-blue-600 text-white hover:bg-blue-700">
-            <Upload className="mr-2" size={20} />
-            Upload
-          </Button>
+           <SignedOut>
+              <SignInButton />
+              <SignUpButton>
+                <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
         </div>
         <div className="bg-gray-800 rounded-lg shadow-xl">
           <div className="px-6 py-4 border-b border-gray-700">
