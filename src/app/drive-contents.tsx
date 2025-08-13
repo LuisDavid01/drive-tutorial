@@ -16,6 +16,8 @@ export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[],
   folders: (typeof folders_table.$inferSelect)[],
   parents: (typeof folders_table.$inferSelect)[],
+
+  currentFolderId: number
 }) {
   const Breadcrumbs: unknown[] = [];
 /*
@@ -94,11 +96,13 @@ export default function DriveContents(props: {
             ))}
           </ul>
         </div>
-        <UploadButton endpoint={"imageUploader"} onClientUploadComplete={
+        <UploadButton endpoint={"imageUploader"} input={{
+          folderId: props.currentFolderId
+        }} onClientUploadComplete={
           () => {
             navigate.refresh()
             }}>
-
+              
             </UploadButton>
       </div>
     </div>

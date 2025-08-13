@@ -36,7 +36,15 @@ export const QUERIES = {
         .from(folderSchema)
         .where(eq(folderSchema.parent, folderId));
         return foldersPromise
-    }
+    },
+
+    getFoldersById: async function(folderId: number ){
+      const folder = await db.select()
+      .from(folderSchema)
+      .where(eq(folderSchema.id, folderId))
+
+      return folder[0];
+    },
 
 
 }
