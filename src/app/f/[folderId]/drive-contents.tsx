@@ -45,10 +45,10 @@ export default function DriveContents(props: {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center">
-            <Link href={`/f/1`}>
+            <Link href={`/`}>
             <Button
               variant="ghost"
-              className="text-gray-300 hover:text-white mr-2"
+              className="text-gray-300 hover:text-black mr-2"
             >
               My Drive
             </Button>
@@ -59,7 +59,7 @@ export default function DriveContents(props: {
                 <Link href={`/f/${folder.id}`}>
                 <Button
                   variant="ghost"
-                  className="text-gray-300 hover:text-white"
+                  className="text-gray-300 hover:text-black"
                 >
                   {folder.name}
                 </Button>
