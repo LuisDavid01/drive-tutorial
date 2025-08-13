@@ -1,16 +1,17 @@
-
-import { Upload, ChevronRight } from "lucide-react"
+'use client'
+import {  ChevronRight } from "lucide-react"
 import { Button } from "~/components/ui/button"
 import { FileRow, FolderRow } from "./folder-row"
 import type { files_table, folders_table } from "~/server/db/schema"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import {
   SignInButton,
-  SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { UploadButton } from "~/components/UploadthingButton"
 export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[],
   folders: (typeof folders_table.$inferSelect)[],
@@ -36,7 +37,7 @@ export default function DriveContents(props: {
   }, [currentFolder, props.folders]);
 */
 
-
+  const navigate = useRouter()
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
       <div className="max-w-6xl mx-auto">
@@ -53,7 +54,7 @@ export default function DriveContents(props: {
             {props.parents.map((folder, index) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
-                <Link href={`/f/1`}>
+                <Link href={`/f/${folder.id}`}>
                 <Button
                   variant="ghost"
                   className="text-gray-300 hover:text-white"
@@ -65,12 +66,11 @@ export default function DriveContents(props: {
             ))}
           </div>
            <SignedOut>
-              <SignInButton />
-              <SignUpButton>
+              <SignInButton>
                 <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
                   Sign Up
                 </button>
-              </SignUpButton>
+              </SignInButton>
             </SignedOut>
             <SignedIn>
               <UserButton />
@@ -94,6 +94,12 @@ export default function DriveContents(props: {
             ))}
           </ul>
         </div>
+        <UploadButton endpoint={"imageUploader"} onClientUploadComplete={
+          () => {
+            navigate.refresh()
+            }}>
+
+            </UploadButton>
       </div>
     </div>
   )
