@@ -27,14 +27,14 @@ export const QUERIES = {
     getFiles: function (folderId: number){
         const filesPromise =  db.select()
         .from(fileSchema)
-        .where(eq(fileSchema.parent, folderId));
+        .where(eq(fileSchema.parent, folderId)).orderBy(fileSchema.id);
         return filesPromise
     },
 
     getFolders: function (folderId: number){
             const foldersPromise =  db.select()
         .from(folderSchema)
-        .where(eq(folderSchema.parent, folderId));
+        .where(eq(folderSchema.parent, folderId)).orderBy(folderSchema.id);
         return foldersPromise
     },
 
