@@ -13,6 +13,24 @@ const config = {
     typescript:{
         ignoreBuildErrors: true,
     },
+    async rewrites() {
+    return [
+      {
+        source: "/relay-FB2r/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/relay-FB2r/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+      {
+        source: "/relay-FB2r/flags",
+        destination: "https://us.i.posthog.com/flags",
+      },
+    ];
+  },
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true, 
 };
 
 export default config;

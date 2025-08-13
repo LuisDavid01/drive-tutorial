@@ -4,6 +4,7 @@ import {
 } from '@clerk/nextjs'
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
+import { PostHogProvider } from "./_provider/posthog-provider";
 
 export const metadata: Metadata = {
   title: "Drive tutorial",
@@ -21,9 +22,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
+      <PostHogProvider>
     <html lang="en" className={`${geist.variable}`}>
       <body>{children}</body>
     </html>
+    </PostHogProvider>
     </ClerkProvider>
   );
 }
